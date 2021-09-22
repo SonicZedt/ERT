@@ -1,5 +1,6 @@
 import os
 import docx
+import pandas as pd
 
 lab = input("Lab: ")
 minggu = int(input("Minggu ke-: "))
@@ -10,21 +11,21 @@ classes = ["2KB", "3KB", "2DC", "3DC"]
 shift = ["Shift 1", "Shift 2", "Shift 3", "Shift 4"]
 assistantName = [
     "Adinda", "Fauzia", "Sidiq", "Titian",
-    "Zulfikar", "Dicky", "Taruna", "Siti", "Al"
+    "Zulfikar", "Dicky", "Taruna", "Siti", "Marwah"
 ]
 
 year = "PTA 2021/2022"
-fileLocation = "BAP/Minggu_{n}/".format(n = minggu)
-#file = "{loc}*{type}".format(loc = fileLocation, type = ".docx")
-fileTarget = "Rekap VLab {labName} minggu {n}{type}".format(labName = lab, n = minggu, type = ".txt")
+fileBAPLoc = "BAP/Minggu_{n}/".format(n = minggu)
+fileTXTLoc = "Recap/"
+fileTarget = "{TXTLoc}Rekap VLab {labName} minggu {n}{type}".format(TXTLoc = fileTXTLoc, labName = lab, n = minggu, type = ".txt")
 #endregion
 
 def LoadFile():
     fileList = []
-    detectedFiles = os.listdir(fileLocation)
+    detectedFiles = os.listdir(fileBAPLoc)
 
     for file in detectedFiles:
-        fileList.append(fileLocation + file)
+        fileList.append(fileBAPLoc + file)
     
     return fileList
 
@@ -94,8 +95,12 @@ def RecapTXT():
 
     fileList = LoadFile()
     for fileIndex in range(len(fileList)):
+        print("Merekap", fileList[fileIndex], ".......")
+
         formattedParagraph = "{DS} \n {LA} \n\n".format(DS = Date_Shift(fileIndex), LA = ListAssistant(fileIndex))
         with open(fileTarget, 'a') as fileTXT:
             fileTXT.write(formattedParagraph)
     
     print("Rekapan Lab {labName} minggu {n} selesai dibuat!".format(labName = lab, n = minggu))
+
+RecapTXT()
