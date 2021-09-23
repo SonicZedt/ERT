@@ -128,5 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# ignore BAP subfolder
+# ignore dummy files
 **/*.docx
+**/*.txt
