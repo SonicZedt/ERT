@@ -1,6 +1,6 @@
 import os
 import docx
-import pandas as pd
+import pandas
 
 lab = input("Lab: ")
 minggu = int(input("Minggu ke-: "))
@@ -9,14 +9,12 @@ minggu = int(input("Minggu ke-: "))
 days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]
 classes = ["2KB", "3KB", "2DC", "3DC"]
 shift = ["Shift 1", "Shift 2", "Shift 3", "Shift 4"]
-assistantName = [
-    "Adinda", "Fauzia", "Sidiq", "Titian",
-    "Zulfikar", "Dicky", "Taruna", "Siti", "Marwah"
-]
-
 year = "PTA 2021/2022"
+
+fileDAsLoc = "Data/"
 fileBAPLoc = "BAP/Minggu_{n}/".format(n = minggu)
 fileTXTLoc = "Recap/"
+dataAssistant = pandas.read_excel(fileDAsLoc + "Data_Assistant.xlsx").to_dict()
 fileTarget = "{TXTLoc}Rekap VLab {labName} minggu {n}{type}".format(TXTLoc = fileTXTLoc, labName = lab, n = minggu, type = ".txt")
 #endregion
 
@@ -75,18 +73,22 @@ def Date_Shift(fileIndex):
     return subheader
 
 def ListAssistant(fileIndex):
-    presentAssistan = []
+    presentAssistant = []
 
-    for ass in assistantName:
-        assistant = GetParagraph(ass, fileIndex)
-        if assistant != None:
-            if '*' in assistant:
-                presentAssistan.insert(0,"- " + assistant)
-            else:
-                presentAssistan.append(" - " + assistant)
-    
-    presentAssistanList = '\n'.join(presentAssistan)
-    return presentAssistanList
+    def GetList(key):
+        for data in dataAssistant[key]:
+            name = GetParagraph(dataAssistant[key].get(data), fileIndex)
+            if name != None:
+                if '*' in name:
+                    presentAssistant.insert(0," - " + name)
+                else:
+                    presentAssistant.append(" - " + name)
+
+    GetList('Assistant')
+    GetList('Coass')
+    presentAssistant[1:] = sorted(set(presentAssistant[1:]))
+
+    return '\n'.join(presentAssistant)
 #endregion
 
 # Weekly PJS recap into txt
