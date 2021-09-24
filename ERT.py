@@ -1,6 +1,10 @@
 import os
 import docx
 import pandas
+import UI
+
+UI.SetTextColor()
+UI.Header()
 
 lab = input("Lab: ")
 minggu = int(input("Minggu ke-: "))
@@ -80,7 +84,7 @@ def ListAssistant(fileIndex):
             name = GetParagraph(dataAssistant[key].get(data), fileIndex)
             if name != None:
                 if '*' in name:
-                    presentAssistant.insert(0," - " + name)
+                    presentAssistant.insert(0,"- " + name)
                 else:
                     presentAssistant.append(" - " + name)
 
