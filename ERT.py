@@ -1,8 +1,18 @@
-import UI
-UI.SetTextColor()
-UI.Header()
+def SetupUI():
+    import UI
 
-import Source
-import Recap
+    UI.SetTextColor()
+    UI.Header()
 
-Recap.RecapTXT()
+def ImportSource():
+    import Source
+
+def StartRecap():
+    import Recap
+
+    Recap.RecapTXT()
+
+if __name__ == "__main__":
+    SetupUI()
+    ImportSource()
+    StartRecap()
