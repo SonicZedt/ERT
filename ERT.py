@@ -12,7 +12,10 @@ def StartRecap():
 
     Recap.RecapTXT()
 
-if __name__ == "__main__":
+def main():
     SetupUI()
     ImportSource()
-    StartRecap()
+    StartRecap()   
+
+if __name__ == "__main__":
+    main()
