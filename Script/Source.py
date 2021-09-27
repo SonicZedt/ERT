@@ -32,6 +32,8 @@ def InputCheck(inp, src):
 def GetUserInput():
     global lab, minggu, level, currentCond
     lab = (input("Lab: "))
+    if lab.isupper():
+        lab = lab.lower()
     if(not InputCheck(lab, labList)):
         GetUserInput()
     minggu = int(input("Minggu ke-: "))

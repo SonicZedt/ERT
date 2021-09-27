@@ -1,5 +1,10 @@
 from Source import *
 
+def DeleteParagraph(paragraph):
+    p = paragraph._element
+    p.getparent().remove(p)
+    paragraph._p = paragraph._element = None
+
 def Date_Shift(fileIndex): # Return date | shift
     date = GetParagraph("Hari", fileIndex)
     class_shift = GetParagraph("Kelas", fileIndex)
@@ -40,5 +45,15 @@ def ListAssistant(fileIndex): # Return listed assistant name in loaded file
 
     return '\n'.join(presentAssistant)
 
-def DOCXContent(fileIndex):
-    content = []
+def RemoveDOCXHeader(fileIndex): # Remove PJS report header and save in temp folder
+    doc = docx.Document(fileList[fileIndex])
+
+    for paragraph in doc.paragraphs:
+        if paragraph.text == GetParagraph("Hari", fileIndex):
+            paragraph.insert_paragraph_before('')
+            break
+        p = paragraph._element
+        p.getparent().remove(p)
+        paragraph._p = paragraph._element = None
+
+    doc.save("{0}{1}doctemp_{2}_{3}.docx".format(fileTempLoc, labList[labGroup][0], fileIndex, minggu))
