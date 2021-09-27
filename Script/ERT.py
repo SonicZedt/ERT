@@ -2,20 +2,16 @@ def SetupUI():
     import UI
 
     UI.SetTextColor()
-    UI.Header()
-
-def ImportSource():
-    import Source
-
-def StartRecap():
-    import Recap
-
-    Recap.RecapTXT()
+    UI.Header()    
 
 def main():
     SetupUI()
-    ImportSource()
-    StartRecap()   
+
+    import Source
+    import Recap
+
+    #Recap.RecapTXT()
+    Recap.RecapDOCX()
 
 if __name__ == "__main__":
     main()
