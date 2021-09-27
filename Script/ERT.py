@@ -10,7 +10,7 @@ def main():
     import Source
     import Recap
 
-    #Recap.RecapTXT()
+    Recap.RecapTXT()
     Recap.RecapDOCX()
 
 if __name__ == "__main__":

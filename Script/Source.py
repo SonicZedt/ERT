@@ -64,25 +64,22 @@ else:
 fileDAsLoc = "Data/"
 fileBAPLoc = "BAP/Minggu_{0}/".format(minggu)
 fileTargetLoc = "Recap/"
+fileTempLoc = "Recap/temp/"
 dataAssistant = pandas.read_excel(fileDAsLoc + "Data_Assistant.xlsx").to_dict()
 fileTXTTarget = "{0}Rekap VLab {1} minggu {2}.txt".format(fileTargetLoc,labList[labGroup][0], minggu)
 fileDOCXTarget = "{0}BAP {1} {2} MINGGU {3}.docx".format(fileTargetLoc, labList[labGroup][1], level.upper(), minggu)
 
-def LoadFile(): # Load all .docx files
-    fileList = []
-    detectedFiles = os.listdir(fileBAPLoc)
-
-    for file in detectedFiles:
-        fileList.append(fileBAPLoc + file)
-    
-    if not fileList:
-        print("Folder BAP/Minggu_{0} tidak terdeteksi".format(minggu))
-        GetUserInput()
-
-    return fileList
+#region Load all .docx files
+fileList = []
+detectedFiles = os.listdir(fileBAPLoc)
+for file in detectedFiles:
+    fileList.append(fileBAPLoc + file)
+if not fileList:
+    print("Folder BAP/Minggu_{0} tidak terdeteksi".format(minggu))
+    GetUserInput()
+#regionend
 
 def GetFullText(fileIndex):
-    fileList = LoadFile()
     source = fileList[fileIndex]
     doc = docx.Document(source)
     fullText = []

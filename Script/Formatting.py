@@ -39,3 +39,6 @@ def ListAssistant(fileIndex): # Return listed assistant name in loaded file
     presentAssistant[1:] = sorted(set(presentAssistant[1:]))
 
     return '\n'.join(presentAssistant)
+
+def DOCXContent(fileIndex):
+    content = []

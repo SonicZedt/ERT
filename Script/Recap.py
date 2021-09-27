@@ -1,5 +1,6 @@
 from Source import *
 from Formatting import Date_Shift, ListAssistant
+from docxcompose.composer import Composer
 
 def CreateTXT():
     with open(fileTXTTarget, 'w') as file:
@@ -8,7 +9,6 @@ def CreateTXT():
 def RecapTXT():
     CreateTXT()
 
-    fileList = LoadFile()
     for fileIndex in range(len(fileList)):
         print("Merekap", fileList[fileIndex], "ke TXT.......")
 
@@ -41,15 +41,12 @@ def CreateDOCX():
 
 def RecapDOCX():
     CreateDOCX()
-    mergedDoc = docx.Document()
-    fileList = LoadFile()
+    mainFile = docx.Document(fileDOCXTarget)
 
-    for fileIndex, file in enumerate(fileList):
+    composer = Composer(mainFile)
+    for fileIndex in range(len(fileList)):
         print("Merekap", fileList[fileIndex], "ke DOCX.......")
-        tempDoc = docx.Document(file)
-        if fileIndex < len(fileList)-1:
-            tempDoc.add_page_break()
-        for element in tempDoc.element.body:
-            mergedDoc.element.body.append
+        nextFile = docx.Document(fileList[fileIndex])
+        composer.append(nextFile)
     
-    mergedDoc.save(fileDOCXTarget)
+    composer.save(fileDOCXTarget)
