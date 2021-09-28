@@ -22,7 +22,7 @@ def CreateDOCX():
     doc = docx.Document()
     #region Long header and subheader text
     header = "BERITA ACARA PRAKTIKUM DAN REKAPAN NILAI \nMINGGU KE - {0}{1} \nLABORATORIUM {2} \n".format(minggu, covid_docxHeader, labList[labGroup][1])
-    subheader = "Praktikum {0} diadakan satu minggu sekali{1}. Berikut berita acara praktikum di minggu ke-{2} (PH_TANGGAL)".format(labList[labGroup][2], covid_docxSubheader, minggu)
+    subheader = "Praktikum {0} diadakan satu minggu sekali{1}. Berikut berita acara praktikum di minggu ke-{2} ({3} - {4})".format(labList[labGroup][2], covid_docxSubheader, minggu, GetStartDate(), GetEndDate())
     #endregion
 
     def WriteParagraph(paragraph, styleBbold = False):

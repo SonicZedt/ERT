@@ -1,5 +1,10 @@
 from Source import *
 
+dates = []
+for fileIndex in range(len(fileList)):
+    date = GetParagraph("Hari", fileIndex)
+    dates.append(date[date.find(",") + 2:])
+
 def Date_Shift(fileIndex): # Return date | shift
     date = GetParagraph("Hari", fileIndex)
     class_shift = GetParagraph("Kelas", fileIndex)
@@ -39,6 +44,12 @@ def ListAssistant(fileIndex): # Return listed assistant name in loaded file
     presentAssistant[1:] = sorted(set(presentAssistant[1:]))
 
     return '\n'.join(presentAssistant)
+
+def GetStartDate():
+    return dates[0]
+
+def GetEndDate():
+    return dates[-1]
 
 def RemoveDOCXHeader(fileIndex): # Remove PJS report header and save in temp folder
     print("Menghapus header dokumen " + fileList[fileIndex])
