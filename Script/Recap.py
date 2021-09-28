@@ -1,7 +1,6 @@
 from Source import *
 from Formatting import *
 from docxcompose.composer import Composer
-import time
 
 def CreateTXT():
     with open(fileTXTTarget, 'w') as file:
@@ -11,7 +10,7 @@ def RecapTXT():
     CreateTXT()
 
     for fileIndex in range(len(fileList)):
-        print("Merekap", fileList[fileIndex], "ke TXT.......")
+        print("Merekap", fileList[fileIndex], "ke TXT")
 
         formattedParagraph = "{0} \n {1} \n\n".format(Date_Shift(fileIndex), ListAssistant(fileIndex))
         with open(fileTXTTarget, 'a') as fileTXT:
@@ -43,29 +42,36 @@ def CreateDOCX():
 def RecapDOCX():
     CreateDOCX()
     docTempList = []
-    tempFiles = os.listdir(fileTempLoc)
 
     for fileIndex in range(len(fileList)):
         RemoveDOCXHeader(fileIndex)
-    
-    for file in tempFiles:
-        if file == 'Recap.ZEDT':
-            continue
-        docTempList.append(fileTempLoc + file)
+
+    tempFiles = os.listdir(fileTempLoc)
+
+    def AppendDocTemp():
+        for file in tempFiles:
+            if file == 'Recap.ZEDT':
+                continue
+            docTempList.append(fileTempLoc + file)
+        MergeDOCX()
 
     mainFile = docx.Document(fileDOCXTarget)
     composer = Composer(mainFile)
 
-    def AppendTempDoc():
-        if(len(docTempList) < len(fileList)):
-            print(".")
-            AppendTempDoc()
+    def MergeDOCX():
         for fileIndex in range(len(docTempList)):
-            print("Merekap", fileList[fileIndex], "ke DOCX.......")
+            print("Menggabungkan", docTempList[fileIndex], "ke dokumen utama")
             nextFile = docx.Document(docTempList[fileIndex])
-            composer.append(nextFile) 
+            composer.append(nextFile)
 
-    AppendTempDoc()
+    def DeleteTempDoc():
+        for temp in tempFiles:
+            if temp == 'Recap.ZEDT':
+                continue
+            print("Membersihkan folder", fileTempLoc + ".......")
+            os.remove(fileTempLoc + temp)
 
+    AppendDocTemp()
     composer.save(fileDOCXTarget)
     print("Rekapan Lab {0} minggu {1} (DOCX) selesai dibuat!\n".format(labList[labGroup][2], minggu))
+    DeleteTempDoc()

@@ -79,7 +79,7 @@ for file in detectedFiles:
 if not fileList:
     print("Folder BAP/Minggu_{0} tidak terdeteksi".format(minggu))
     GetUserInput()
-#regionend
+#endregion
 
 def GetFullText(fileIndex):
     source = fileList[fileIndex]
