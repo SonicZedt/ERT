@@ -1,6 +1,7 @@
 # ERT
 Elkom Recap Tool adalah sebuah tool yang dibuat untuk memudahkan Penanggung Jawab Praktikum Lab. Elektronika Dasar, Sistem Digital, Mikroprosesor, Sistem Tertanam, dan Interface dalam membuat rekapan praktikum (_.docx_) dan shift Penanggung Jawab Shift (_.txt_) mingguan.
-
+<br/>
+  
 ### Cara pengoperasian
 1. Masukan semua laporan PJ Shift (_.docx_) minggu ke-n ke dalam folder .\BAP\Minggu_n, folder tersebut dapat dibuat secara manual.
 2. Urutkan laporan dengan mengubah nama tiap file laporan (_.docx_), dapat dengan memberikan nomor urut atau urutan abjad di awal.  
@@ -10,11 +11,22 @@ Elkom Recap Tool adalah sebuah tool yang dibuat untuk memudahkan Penanggung Jawa
    - `Lab: ` `str` (eldas, sisdig, mp, sister, iface) atau (ELDAS, SISDIG, MP, SISTER, IFACE)
    - `Minggu ke-: ` `int`
    - `Jenjang: ` `str`
-   - `Daring (y/n): ` `str` (y atau yang lainnya). Akan ditambahkan text ` SELAMA COVID-19` pada header dan ` secara virtual` pada subheader untuk rekapan (_.docx_) apabila diberikan input y  
+   - `Daring (y/n): ` `str` (y atau yang lainnya). Akan ditambahkan text ` SELAMA COVID-19` pada header dan ` secara virtual` pada subheader untuk rekapan (_.docx_) apabila diberikan input `y`  
    ![ERT](https://user-images.githubusercontent.com/83224221/135095803-ce72ae8a-567b-4b03-a7ec-04f65fee2ece.jpg)
 5. Selesai. Hasil rekapan bisa dilihat di folder .\Recap  
 ![output](https://user-images.githubusercontent.com/83224221/135096210-6dca1914-57a1-423c-8763-7530a3171011.jpg)
+<br/>
+  
+### Format Laporan PJ Shift
+Format laporan PJ Shift yang dapat dibaca adalah laporan yang berekstensi (_.docx_) dan didalamnya terdapat:
+- `Hari`. Nama hari yang dapat terbaca adalah `Senin`, `Selasa`, `Rabu`, `Kamis`, `Jumat`, `Sabtu`, dan `Minggu`.
+- `Kelas/Shift`. Kelas yang dapat terbaca adalah `2KBXX`, `3KBXX`, `2DCXX`, dan `3DCXX`. Shift yang dapat terbaca adalah `Shift 1`, `Shift 2`, `Shift 3`, dan `Shift 4`
+- `(Nama Asisten/Coass)` yang tertera di dalam *Data_Assistant.xlxs*
+> Semua `text` tersebut bersifat ***CASE SENSITIVE!***
 
+Atau untuk lebih jelasnya dapat lihat [contoh laporan PJ Shift](https://docs.google.com/document/d/1Vd3yxQcf4oYirQsO771hFuyklJY6h4HN/edit?usp=sharing&ouid=106238154602768730311&rtpof=true&sd=true)
+<br/>
+  
 ### Pembaharuan data nama Asisten
 Data nama Asisten dan Coass disimpan dalam format (_.xlsx_) di dalam folder .\Data dan dapat ditambah, diubah, serta dihapus menggunakan software yang mendukung ekstensi tersebut.  
 Nama baru yang ditambahkan tidak perlu nama lengkap, dan disarankan hanya memasukan nama yang sekiranya akan ditulis pada laporan PJ Shift.
