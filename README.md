@@ -10,6 +10,7 @@ Elkom Recap Tool adalah sebuah tool yang dibuat untuk memudahkan Penanggung Jawa
 4. Masukan input yang dibutuhkan:
    - `Lab: str`. Berikut adalah list input yang dapat terbaca:
       - `["eldas", "ELEKTRONIKA DASAR", "Elektronika Dasar"],`
+      - `["elan", "ELEKTRONIKA LANJUT", "Elektronika Lanjut"],`
       - `["sisdig", "SISTEM DIGITAL", "Sistem Digital"],`
       - `["mp", "MIRKOPROSESOR", "Mikroprosesor"],`
       - `["sister", "SISTEM TERTANAM", "Sistem Tertanam"],`
