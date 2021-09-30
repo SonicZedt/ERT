@@ -46,18 +46,28 @@ def ListAssistant(fileIndex): # Return listed assistant name in loaded file
     presentAssistant = []
 
     def GetList(key):
-        for data in dataAssistant[key]:
-            name = GetParagraph(dataAssistant[key].get(data), fileIndex)
-            if name != None:
-                if '*' in name:
-                    presentAssistant.insert(0,"- " + name)
-                else:
-                    presentAssistant.append(" - " + name)
+        dataset = dataAssistant[key]
 
+        for data in dataset:
+            d = dataset.get(data)
+            if type(d) is not str:
+                continue
+            name = GetParagraph(d, fileIndex)
+            if name != None:
+                presentAssistant.append(" - " + name)
+    
     GetList('Assistant')
     GetList('Coass')
-    presentAssistant[1:] = sorted(set(presentAssistant[1:]))
+    GetList('Alt')
 
+    presentAssistant = sorted(set(presentAssistant))
+    #region Star sorting
+    for starCount in range(1, 3):
+        for name in presentAssistant:
+            if name.count('*') == starCount:
+                presentAssistant.insert(0, presentAssistant.pop(presentAssistant.index(name)))
+    #endregion
+    
     return '\n'.join(presentAssistant)
 
 def GetStartDate():
