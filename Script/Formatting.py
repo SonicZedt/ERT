@@ -1,4 +1,5 @@
 from Source import *
+from Summarize import ErrorCount
 
 dates = []
 for fileIndex in range(len(fileList)):
@@ -17,11 +18,13 @@ def Date_Shift(fileIndex): # Return date | shift
     if ObjectNotFound(date):
         errorMsg = ("[Error] Hari tidak terbaca di {0}".format(fileList[fileIndex]))
         print(errorMsg)
+        ErrorCount(1)
         return errorMsg
     
     elif ObjectNotFound(class_shift):
         errorMsg = ("[Error] Kelas tidak terbaca di {0}".format(fileList[fileIndex]))
         print(errorMsg)
+        ErrorCount(1)
         return errorMsg
 
     for day in days:

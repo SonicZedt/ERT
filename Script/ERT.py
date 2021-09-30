@@ -4,21 +4,23 @@ def SetupUI():
     UI.SetTextColor()
     UI.Header()    
 
-def TerminateIn(delay):
-    import time
-    for d in range(delay):
-        print("Keluar otomatis dalam", 5-d)
-        time.sleep(1)
+def ConfirmTerminate():
+    input("Tekan Enter untuk keluar")
 
 def main():
     SetupUI()
 
     import Source
     import Recap
+    import Summarize
 
     Recap.RecapTXT()
     Recap.RecapDOCX()
-    TerminateIn(5)
+
+    print("\n\nJumlah laporan direkap:", Summarize.SourceFileCount())
+    print("Jumlah error:", Summarize.ErrorCount(), "\n")
+    
+    ConfirmTerminate()
 
 if __name__ == "__main__":
     main()
