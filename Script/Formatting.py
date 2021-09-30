@@ -8,8 +8,23 @@ for fileIndex in range(len(fileList)):
 def Date_Shift(fileIndex): # Return date | shift
     date = GetParagraph("Hari", fileIndex)
     class_shift = GetParagraph("Kelas", fileIndex)
+    
+    def ObjectNotFound(obj):
+        if obj is None:
+            return True
+        return False
+    
+    if ObjectNotFound(date):
+        errorMsg = ("[Error] Hari tidak terbaca di {0}".format(fileList[fileIndex]))
+        print(errorMsg)
+        return errorMsg
+    
+    elif ObjectNotFound(class_shift):
+        errorMsg = ("[Error] Kelas tidak terbaca di {0}".format(fileList[fileIndex]))
+        print(errorMsg)
+        return errorMsg
 
-    for day in days:            
+    for day in days:
         newdate = date[date.find(day):]
         if day in date:
             break
