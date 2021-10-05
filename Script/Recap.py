@@ -68,7 +68,7 @@ def RecapDOCX():
         for temp in tempFiles:
             if temp == 'Recap.ZEDT':
                 continue
-            print("Membersihkan folder", fileTempLoc + ".......")
+            print("Menghapus file", fileTempLoc + temp)
             os.remove(fileTempLoc + temp)
 
     AppendDocTemp()

@@ -1,5 +1,10 @@
+from os import error
 from Source import *
 from Summarize import ErrorCount
+
+class font_color:
+    error = '\033[91m'
+    normal = '\033[93m'
 
 dates = []
 for fileIndex in range(len(fileList)):
@@ -15,14 +20,17 @@ def Date_Shift(fileIndex): # Return date | shift
             return True
         return False
     
+    def ErrorMessage(keyword):
+        return ("{0}[Error] Hari tidak terbaca di {1}{2}".format(font_color.error, fileList[fileIndex], font_color.normal))
+
     if ObjectNotFound(date):
-        errorMsg = ("[Error] Hari tidak terbaca di {0}".format(fileList[fileIndex]))
+        errorMsg = ErrorMessage("Hari")
         print(errorMsg)
         ErrorCount(1)
         return errorMsg
     
     elif ObjectNotFound(class_shift):
-        errorMsg = ("[Error] Kelas tidak terbaca di {0}".format(fileList[fileIndex]))
+        errorMsg = ErrorMessage("Kelas")
         print(errorMsg)
         ErrorCount(1)
         return errorMsg
