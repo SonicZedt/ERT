@@ -132,3 +132,6 @@ dmypy.json
 **/*.docx
 **/*.txt
 **/testfile.py
+
+# ignore raw data
+**/Data_Assistant.xlsx

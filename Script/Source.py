@@ -71,7 +71,8 @@ fileDAsLoc = "Data/"
 fileBAPLoc = "BAP/Minggu_{0}/".format(minggu)
 fileTargetLoc = "Recap/"
 fileTempLoc = "Recap/temp/"
-dataAssistant = pandas.read_excel(fileDAsLoc + "Data_Assistant.xlsx").to_dict()
+dataAssistantURL = "https://raw.githubusercontent.com/SonicZedt/ERT/alt/Data/Data_Assistant.csv"
+dataAssistant = pandas.read_csv(dataAssistantURL).to_dict()
 fileTXTTarget = "{0}Rekap VLab {1} minggu {2}.txt".format(fileTargetLoc,labList[labGroup][0], minggu)
 fileDOCXTarget = "{0}BAP {1} {2} MINGGU {3}.docx".format(fileTargetLoc, labList[labGroup][1], level, minggu)
 
