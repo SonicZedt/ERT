@@ -28,7 +28,7 @@ Format laporan PJ Shift yang dapat dibaca adalah laporan yang berekstensi (_.doc
 - `Hari`. Nama hari yang dapat terbaca adalah `["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]`.
 - `Kelas/Shift`. Kelas yang dapat terbaca adalah yang 3 huruf pertamanya `["2KB", "3KB", "2DC", "3DC"]`. Shift yang dapat terbaca adalah `["Shift 1", "Shift 2", "Shift 3", "Shift 4"]`
 - `(Nama Asisten/Coass)` yang dapat terbaca adalah nama-nama yang tertera di dalam *Data_Assistant.xlxs*
-> Semua text tersebut bersifat ***CASE SENSITIVE*** dan ***STYLE SENSITIVE***
+> Semua text tersebut bersifat ***CASE SENSITIVE***.
 
 Atau untuk lebih jelasnya dapat lihat [contoh laporan PJ Shift](https://docs.google.com/document/d/1Vd3yxQcf4oYirQsO771hFuyklJY6h4HN/edit?usp=sharing&ouid=106238154602768730311&rtpof=true&sd=true)
 <br/>
