@@ -34,6 +34,6 @@ Atau untuk lebih jelasnya dapat lihat [contoh laporan PJ Shift](https://docs.goo
 <br/>
   
 ### Pembaharuan data nama Asisten
-Data nama Asisten dan Coass disimpan dalam format (_.xlsx_) di dalam folder .\Data dan dapat ditambah, diubah, serta dihapus menggunakan software yang mendukung ekstensi tersebut.  
+Data nama Asisten, nama Coass, dan nama alternatif disimpan dalam format (_.csv_) di dalam [/Data](https://github.com/SonicZedt/ERT/tree/alt/Data).
 Nama baru yang ditambahkan tidak perlu nama lengkap, dan disarankan hanya memasukan nama yang sekiranya akan ditulis pada laporan PJ Shift.
-Apabila nama coass seorang Asisten tidak diketahui atau sebaliknya, ~~maka dapat diisi dengan `unknown` karena kolom `Assistant` dan `Coass` dalam baris yang sama salah satunya tidak dapat dibiarkan kosong~~, maka kolom tersebut dapat dibiarkan kosong (update v1.1).
+Apabila nama coass seorang Asisten tidak diketahui atau sebaliknya, maka kolom tersebut dapat dibiarkan kosong.
