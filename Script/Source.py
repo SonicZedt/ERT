@@ -1,6 +1,7 @@
 import os
 import docx
 import pandas
+import requests
 
 labList = [
 
@@ -67,12 +68,33 @@ else:
     covid_docxHeader = covid_docxSubheader = ""
 #endregion
 
+def GetDataAssistant():
+    url = "https://raw.githubusercontent.com/SonicZedt/ERT/alt/Data/Data_Assistant.csv"
+    
+    class font_color:
+        error = '\033[91m'
+        normal = '\033[93m'
+    
+    def Exit():
+        input("Tekan Enter untuk keluar")
+        exit()
+
+    try:
+        requests.get(url, timeout=50)
+        if requests.get(url).status_code == 404:
+            print("{0}[Error] Data - 404{1}".format(font_color.error, font_color.normal))
+            Exit()
+        return url
+    except (requests.ConnectionError, requests.Timeout) as exception:
+        print("{0}[Error] Tidak ada koneksi internet{1}".format(font_color.error, font_color.normal))
+        Exit()
+
+
 fileDAsLoc = "Data/"
 fileBAPLoc = "BAP/Minggu_{0}/".format(minggu)
 fileTargetLoc = "Recap/"
 fileTempLoc = "Recap/temp/"
-dataAssistantURL = "https://raw.githubusercontent.com/SonicZedt/ERT/alt/Data/Data_Assistant.csv"
-dataAssistant = pandas.read_csv(dataAssistantURL).to_dict()
+dataAssistant = pandas.read_csv(GetDataAssistant()).to_dict()
 fileTXTTarget = "{0}Rekap VLab {1} minggu {2}.txt".format(fileTargetLoc,labList[labGroup][0], minggu)
 fileDOCXTarget = "{0}BAP {1} {2} MINGGU {3}.docx".format(fileTargetLoc, labList[labGroup][1], level, minggu)
 
