@@ -70,7 +70,7 @@ else:
 
 def GetDataAssistant():
     url = "https://raw.githubusercontent.com/SonicZedt/ERT/alt/Data/Data_Assistant.csv"
-    
+
     class font_color:
         error = '\033[91m'
         normal = '\033[93m'
