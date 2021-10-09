@@ -26,6 +26,7 @@ def ErrorMessage(source, keyword, extra = ""):
         extra = (", " + extra)
     msg = "{0}[Error] {1} tidak terbaca di {2}{3}{4}".format(font_color.error, keyword, source, extra, font_color.normal)
     print(msg)
+    return msg
 
 def DeleteMultiFiles(location, files, exception = 'exception', log = False):
     for file in files:
