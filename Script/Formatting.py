@@ -8,8 +8,9 @@ for fileIndex in range(len(fileList)):
     try:
         dates.append(date[date.find(",") + 2:])
     except:
-        #print(ErrorMessage("Hari", "perbaikan manual diperlukan untuk {0}".format(fileDOCXTarget)))
         Handler.ErrorMessage(fileList[fileIndex], "Tanggal", "perbaikan manual diperlukan untuk {0}".format(fileDOCXTarget))
+print("Praktikum pertama pada:", dates[0], "dari", fileList[0])
+print("Praktikum terakhir pada:", dates[-1], "dari", fileList[-1], '\n')
 
 def Date_Shift(fileIndex): # Return date | shift
     date = GetParagraph("Hari", fileIndex)

@@ -65,17 +65,9 @@ def RecapDOCX():
             nextFile = docx.Document(docTempList[fileIndex])
             composer.append(nextFile)
 
-    #def DeleteTempDoc():
-    #    for temp in tempFiles:
-    #        if temp == 'Recap.ZEDT':
-    #            continue
-    #        print("Menghapus file", fileTempLoc + temp)
-    #        os.remove(fileTempLoc + temp)
-
     AppendDocTemp()
     composer.save(fileDOCXTarget)
     print("{0}Rekapan Lab {1} minggu {2} (DOCX) selesai dibuat!{3}\n".format(font_color.success, labList[labGroup][2], minggu, font_color.normal))
-    #DeleteTempDoc()
 
     DeleteMultiFiles(fileTempLoc, tempFiles, exception='Recap.ZEDT', log=True)
     DeleteMultiFiles(dataLoc, os.listdir(dataLoc))
