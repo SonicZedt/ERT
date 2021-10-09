@@ -2,25 +2,42 @@ import os
 import docx
 import pandas
 import requests
+import pickle
+import Handler
 
-labList = [
+dataLoc = "Data/"
+urlList = [
+    'https://github.com/SonicZedt/ERT/raw/alt/Data/Data_Class.ZEDT',
+    'https://github.com/SonicZedt/ERT/raw/alt/Data/Data_Lab.ZEDT',
+    'https://github.com/SonicZedt/ERT/raw/alt/Data/Data_Shift.ZEDT',
+    'https://raw.githubusercontent.com/SonicZedt/ERT/alt/Data/Data_TA.txt'
+    ]
 
-    #index  : purpose
-    #0      : txt file name and header
-    #1      : docx file name and header
-    #2      : docx subheader
+def ReadData(url, message, type = 'binary'):
+    if not Handler.UrlCheck(url):
+        Handler.Exit()
 
-    ["eldas", "ELEKTRONIKA DASAR", "Elektronika Dasar"],
-    ["elan", "ELEKTRONIKA LANJUT", "Elektronika Lanjut"],
-    ["sisdig", "SISTEM DIGITAL", "Sistem Digital"],
-    ["mp", "MIRKOPROSESOR", "Mikroprosesor"],
-    ["sister", "SISTEM TERTANAM", "Sistem Tertanam"],
-    ["iface", "INTERFACE", "Interface"]
-]
+    print("Membaca data", message)  
+    def GetData(url):
+        file = requests.get(url, allow_redirects=True)
+        fileName = url.rsplit('/', 1)[1]
+        open(dataLoc + fileName, 'wb').write(file.content)
+        return fileName
+
+    if type == 'binary':
+        data = dataLoc + GetData(url)
+        with open(data, 'rb') as dataFile:
+            return pickle.load(dataFile)
+
+    elif type == 'txt':
+        with open(dataLoc + GetData(url), 'r') as dataFile:
+            return dataFile.readline()
+
+classes = ReadData(urlList[0], "1/" + str(len(urlList)))
+labList = ReadData(urlList[1], "2/" + str(len(urlList)))
+shift = ReadData(urlList[2], "3/" + str(len(urlList)))
+year = ReadData(urlList[3], "4/" + str(len(urlList)), type='txt')
 days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]
-classes = ["2KB", "3KB", "2DC", "3DC"]
-shift = ["Shift 1", "Shift 2", "Shift 3", "Shift 4"]
-year = "PTA 2021/2022"
 
 def GetUserInput():
     global lab, minggu, level, currentCond
@@ -48,8 +65,10 @@ def InputCheck(): # Redo input if incorrect value given
         GetUserInput()
 
 if __name__ == "Source":
+    print('\n')
     GetUserInput()
     InputCheck()
+    print('\n')
 
 #region labGroup indexer, covid_conditional
 for group in labList:
@@ -70,25 +89,10 @@ else:
 
 def GetDataAssistant():
     url = "https://raw.githubusercontent.com/SonicZedt/ERT/alt/Data/Data_Assistant.csv"
-
-    class font_color:
-        error = '\033[91m'
-        normal = '\033[93m'
-    
-    def Exit():
-        input("Tekan Enter untuk keluar")
-        exit()
-
-    try:
-        requests.get(url, timeout=50)
-        if requests.get(url).status_code == 404:
-            print("{0}[Error] Data - 404{1}".format(font_color.error, font_color.normal))
-            Exit()
+    if Handler.UrlCheck(url):
         return url
-    except (requests.ConnectionError, requests.Timeout) as exception:
-        print("{0}[Error] Tidak ada koneksi internet{1}".format(font_color.error, font_color.normal))
-        Exit()
-
+    else:
+        Handler.Exit()
 
 fileDAsLoc = "Data/"
 fileBAPLoc = "BAP/Minggu_{0}/".format(minggu)
