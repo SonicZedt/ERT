@@ -26,14 +26,16 @@ Elkom Recap Tool adalah sebuah tool yang dibuat untuk memudahkan Penanggung Jawa
 ### Format Laporan PJ Shift
 Format laporan PJ Shift yang dapat dibaca adalah laporan yang berekstensi (_.docx_) dan didalamnya terdapat:
 - `Hari`. Nama hari yang dapat terbaca adalah `["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]`.
-- `Kelas/Shift`. Kelas yang dapat terbaca adalah yang 3 huruf pertamanya `["2KB", "3KB", "2DC", "3DC"]`. Shift yang dapat terbaca adalah `["Shift 1", "Shift 2", "Shift 3", "Shift 4"]`
+- `Kelas/Shift`. Kelas yang dapat terbaca adalah yang 3 huruf pertamanya `["2KB", "3KB", "2DC", "3DC"]`. Shift yang dapat terbaca adalah `["Shift 1", "Shift 2", "Shift 3", "Shift 4", "Shift 5"]`
 - `(Nama Asisten/Coass)` yang dapat terbaca adalah nama-nama yang tertera di dalam *Data_Assistant.xlxs*
-> Semua text tersebut bersifat ***CASE SENSITIVE***.
+<br/>
+Tanggal dan Hari tidak akan terbaca apabila tulisan `Hari` tidak ada atau ditulis secara tidak benar di dalam laporan.
+<br/>
+Kelas dan Shift tidak akan terbaca apabila tulisan `Kelas` tidak ada atau ditulis secara tidak benar di dalam laporan.
+> tulisan `Hari` dan `Kelas` dalam laporan bersifat ***Case Sensitive***
 
-Atau untuk lebih jelasnya dapat lihat [contoh laporan PJ Shift](https://docs.google.com/document/d/1Vd3yxQcf4oYirQsO771hFuyklJY6h4HN/edit?usp=sharing&ouid=106238154602768730311&rtpof=true&sd=true)
+Untuk lebih jelasnya dapat lihat [contoh laporan PJ Shift](https://docs.google.com/document/d/1Vd3yxQcf4oYirQsO771hFuyklJY6h4HN/edit?usp=sharing&ouid=106238154602768730311&rtpof=true&sd=true)
 <br/>
   
-### Pembaharuan data nama Asisten
-Data nama Asisten, nama Coass, dan nama alternatif disimpan dalam format (_.csv_) di dalam [/Data](https://github.com/SonicZedt/ERT/tree/alt/Data).
-Nama baru yang ditambahkan tidak perlu nama lengkap, dan disarankan hanya memasukan nama yang sekiranya akan ditulis pada laporan PJ Shift.
-Apabila nama coass seorang Asisten tidak diketahui atau sebaliknya, maka kolom tersebut dapat dibiarkan kosong.
+### Koneksi
+ERT memerlukan koneksi internet untuk membaca data. Operasi tidak dapat dilakukan apabila .\Data kosong
