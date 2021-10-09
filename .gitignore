@@ -134,4 +134,4 @@ dmypy.json
 **/testfile.py
 
 # ignore raw data
-**/Data_Assistant.xlsx
+Data/
