@@ -1,3 +1,4 @@
+from Handler import DeleteMultiFiles, font_color
 from Source import *
 from Formatting import *
 from docxcompose.composer import Composer
@@ -16,7 +17,7 @@ def RecapTXT():
         with open(fileTXTTarget, 'a') as fileTXT:
             fileTXT.write(formattedParagraph)
     
-    print("Rekapan Lab {0} minggu {1} (TXT) selesai dibuat!\n".format(labList[labGroup][2], minggu))
+    print("{0}Rekapan Lab {1} minggu {2} (TXT) selesai dibuat!{3}\n".format(font_color.success, labList[labGroup][2], minggu, font_color.normal))
 
 def CreateDOCX():
     doc = docx.Document()
@@ -64,14 +65,17 @@ def RecapDOCX():
             nextFile = docx.Document(docTempList[fileIndex])
             composer.append(nextFile)
 
-    def DeleteTempDoc():
-        for temp in tempFiles:
-            if temp == 'Recap.ZEDT':
-                continue
-            print("Menghapus file", fileTempLoc + temp)
-            os.remove(fileTempLoc + temp)
+    #def DeleteTempDoc():
+    #    for temp in tempFiles:
+    #        if temp == 'Recap.ZEDT':
+    #            continue
+    #        print("Menghapus file", fileTempLoc + temp)
+    #        os.remove(fileTempLoc + temp)
 
     AppendDocTemp()
     composer.save(fileDOCXTarget)
-    print("Rekapan Lab {0} minggu {1} (DOCX) selesai dibuat!\n".format(labList[labGroup][2], minggu))
-    DeleteTempDoc()
+    print("{0}Rekapan Lab {1} minggu {2} (DOCX) selesai dibuat!{3}\n".format(font_color.success, labList[labGroup][2], minggu, font_color.normal))
+    #DeleteTempDoc()
+
+    DeleteMultiFiles(fileTempLoc, tempFiles, exception='Recap.ZEDT', log=True)
+    DeleteMultiFiles(dataLoc, os.listdir(dataLoc))

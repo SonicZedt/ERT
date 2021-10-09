@@ -1,15 +1,6 @@
 from Source import *
 from Summarize import ErrorCount
-
-class font_color:
-    error = '\033[91m'
-    normal = '\033[93m'
-
-def ErrorMessage(keyword, extra = ""):
-    if extra:
-        extra = (", " + extra)
-    msg = "{0}[Error] {1} tidak terbaca di {2}{3}{4}".format(font_color.error, keyword, fileList[fileIndex], extra, font_color.normal)
-    return msg
+import Handler
 
 dates = []
 for fileIndex in range(len(fileList)):
@@ -17,7 +8,8 @@ for fileIndex in range(len(fileList)):
     try:
         dates.append(date[date.find(",") + 2:])
     except:
-        print(ErrorMessage("Hari", "perbaikan manual diperlukan untuk {0}".format(fileDOCXTarget)))
+        #print(ErrorMessage("Hari", "perbaikan manual diperlukan untuk {0}".format(fileDOCXTarget)))
+        Handler.ErrorMessage(fileList[fileIndex], "Tanggal", "perbaikan manual diperlukan untuk {0}".format(fileDOCXTarget))
 
 def Date_Shift(fileIndex): # Return date | shift
     date = GetParagraph("Hari", fileIndex)
@@ -28,17 +20,16 @@ def Date_Shift(fileIndex): # Return date | shift
             return True
         return False
     
-    def NotFoundLog(Message, error = 1):
-        errorMsg = ErrorMessage(Message)
-        print(errorMsg)
+    def NotFoundLog(source, message, error = 1):
+        errorMsg = Handler.ErrorMessage(source, message)
         ErrorCount(error)
         return errorMsg
 
     if ObjectNotFound(date):
-        return NotFoundLog("Hari")
+        return NotFoundLog(fileList[fileIndex], "Hari")
         
     elif ObjectNotFound(class_shift):
-        return NotFoundLog("Kelas")
+        return NotFoundLog(fileList[fileIndex], "Kelas")
     
     def NewDate():
         val = ""
