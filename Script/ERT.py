@@ -1,10 +1,9 @@
 # Author    : Zulfikar Hidayat
 # Project   : ERT
+
 import UI
 import datetime
-
-def ConfirmTerminate():
-    input("Tekan Enter untuk keluar")
+from Handler import Exit
 
 def main():
     UI.SetTextColor()
@@ -24,7 +23,7 @@ def main():
     print("Waktu yang dibutuhkan:", (endTime - startTime).total_seconds(), "detik\n\n")
     UI.Footer()
     
-    ConfirmTerminate()
+    Exit()
 
 if __name__ == "__main__":
     main()
