@@ -3,7 +3,7 @@ import docx
 import pandas
 import requests
 import pickle
-import Handler
+from Handler import check, ERT
 
 dataLoc = "Data/"
 urlList = [
@@ -14,8 +14,8 @@ urlList = [
     ]
 
 def ReadData(url, message, type = 'binary'):
-    if not Handler.UrlCheck(url):
-        Handler.Exit()
+    if not check.Url(url):
+        ERT.Exit()
 
     print("Membaca data", message)  
     def GetData(url):
@@ -89,10 +89,10 @@ else:
 
 def GetDataAssistant():
     url = "https://raw.githubusercontent.com/SonicZedt/ERT/alt/Data/Data_Assistant.csv"
-    if Handler.UrlCheck(url):
+    if check.Url(url):
         return url
     else:
-        Handler.Exit()
+        ERT.Exit()
 
 fileDAsLoc = "Data/"
 fileBAPLoc = "BAP/Minggu_{0}/".format(minggu)

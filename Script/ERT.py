@@ -3,7 +3,8 @@
 
 import UI
 import datetime
-from Handler import Exit
+from Handler import ERT
+
 
 def main():
     UI.SetTextColor()
@@ -14,16 +15,15 @@ def main():
     import Summarize
 
     startTime = datetime.datetime.now()
-    Recap.RecapTXT()
-    Recap.RecapDOCX()
+    Recap.Start()
     endTime = datetime.datetime.now()
 
-    print("\n\nJumlah laporan direkap:", Summarize.SourceFileCount())
-    print("Jumlah error:", Summarize.ErrorCount())
+    print("\n\nJumlah laporan direkap:", Summarize.count.SourceFile())
+    print("Jumlah error:", Summarize.count.Error())
     print("Waktu yang dibutuhkan:", (endTime - startTime).total_seconds(), "detik\n\n")
     UI.Footer()
     
-    Exit()
+    ERT.Exit()
 
 if __name__ == "__main__":
     main()

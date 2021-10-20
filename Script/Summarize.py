@@ -1,10 +1,13 @@
 from Source import fileList
-errorCount = 0
 
-def ErrorCount(e = 0):
+class count:
     global errorCount
-    errorCount = errorCount + e
-    return errorCount
+    errorCount = 0
 
-def SourceFileCount():
-    return len(fileList) 
+    def Error(e = 0):
+        global errorCount
+        errorCount = errorCount + e
+        return errorCount
+
+    def SourceFile():
+        return len(fileList) 
