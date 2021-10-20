@@ -3,7 +3,7 @@ Elkom Recap Tool adalah sebuah tool yang dibuat untuk memudahkan Penanggung Jawa
 <br/>
   
 ### Cara pengoperasian
-1. Masukan semua laporan PJ Shift (_.docx_) minggu ke-n ke dalam folder .\BAP\Minggu_n, folder tersebut dapat dibuat secara manual.
+1. Masukan semua laporan PJ Shift (_.docx_) minggu ke-n ke dalam folder .\BAP\Minggu_n, folder tersebut dapat dibuat secara manual. Dokumen laporan untuk percobaan dapat di-download [di sini](https://drive.google.com/drive/folders/1OnGWbI7Od5HAZgkTv5CoOPJxJEpL0TaW?usp=sharing)
 2. Urutkan laporan dengan mengubah nama tiap file laporan (_.docx_), dapat dengan memberikan nomor urut atau urutan abjad di awal.  
 ![fileList_raw](https://user-images.githubusercontent.com/83224221/135095716-e921f523-3b4d-4e11-9a28-2d5e383d589a.jpg)
 3. Buka file `ERT.exe`
