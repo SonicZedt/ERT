@@ -1,6 +1,7 @@
 import requests
 import os
 import pickle
+from random import randrange
 
 class font_color:
     error = '\033[91m'
@@ -10,7 +11,7 @@ class font_color:
 class error_message:
     notFound = "{0}[Error] Data - 404{1}".format(font_color.error, font_color.normal)
     connectionFail = "{0}[Error] Tidak ada koneksi internet{1}".format(font_color.error, font_color.normal)
-    badLicense = "{0}[Error] Lisensi tidak valid!{1}".format(font_color.error, font_color.normal)
+    badLicense = "{0}[Error] Lisensi tidak ditemukan atau invalid!{1}".format(font_color.error, font_color.normal)
     unlicensedLab = "{0}[Error] Lisensi tidak sesuai atau Lab ini belum terlisensi{1}".format(font_color.error, font_color.normal)
 
     def Generate(source, keyword, extra = ""):
@@ -42,32 +43,62 @@ class files:
             os.remove(location + file)
 
 class ERT:
+    def ClearData():
+        files.DeleteMulti("Data/", os.listdir("Data/"))
+
     def Exit():
             input("Tekan Enter untuk keluar")
             exit()
 
 class License:
     licensedLab = ""
-    def Read(license):
+
+    def Check():
+        if os.path.isfile("License.ZEDT"):
+            return
+        else:
+            print(error_message.badLicense)
+            ERT.Exit()
+
+    def Read():
         global licensedLab
 
         labList = pickle.load(open("Data/Data_Lab.ZEDT", 'rb'))
-        with open(license, 'rb') as file:
+
+        with open("License.ZEDT", 'rb') as file:
             licensedLab = pickle.load(file)
         
         for lab in labList:
             if isinstance(labList[0], list):
                 for name in lab:
                     if licensedLab == name:
-                        print("{0}ERT terlisensi untuk {1}{2}\n".format(font_color.success, lab[2], font_color.normal))
-                        return
+                        print("{0}ERT terlisensi untuk Laboratorium {1}{2}\n".format(font_color.success, lab[2], font_color.normal))
+                        return licensedLab
         else:
             print(error_message.badLicense)
             ERT.Exit()
     
-    def Validation(lab):
+    def Validation(lab, minggu):
+        fileList = []
+        fileLoc = "BAP/Minggu_{0}/".format(minggu)
+        
+        for file in os.listdir(fileLoc):
+            if file == 'BAP.ZEDT':
+                continue
+            fileList.append(fileLoc + file)
+
+        def Sample():
+            sampleIndex = randrange(len(fileList))
+            validationSample = fileList[sampleIndex].lower()
+            return validationSample
+
+        validationSample = Sample()
         if lab == licensedLab:
-            return
+            if(lab in validationSample):
+                return
+            else:
+                print(error_message.unlicensedLab)
+                ERT.Exit()
         else:
             print(error_message.unlicensedLab)
             ERT.Exit()

@@ -73,7 +73,7 @@ class recap:
         print("{0}Rekapan Lab {1} minggu {2} (DOCX) selesai dibuat!{3}\n".format(font_color.success, labList[labGroup][2], minggu, font_color.normal))
 
         files.DeleteMulti(fileTempLoc, tempFiles, exception='Recap.ZEDT', log=True)
-        files.DeleteMulti(dataLoc, os.listdir(dataLoc))
+        #files.DeleteMulti(dataLoc, os.listdir(dataLoc))
 
 def Start():
     recap.RecapTXT()

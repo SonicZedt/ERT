@@ -7,10 +7,10 @@ from Handler import check, ERT, License
 
 dataLoc = "Data/"
 urlList = [
-    'https://drive.google.com/uc?export=download&id=1VaW-0_6JXbyf8ZreOkgc7t5dHAQZVavB', # class
-    'https://drive.google.com/uc?export=download&id=1T7MheGGLmsWOQc981uwfNU7nV_q3u1qv', # lab
-    'https://drive.google.com/uc?export=download&id=14rS4B7_UvZCFVnBvNK0dUNQL_EwkydSs', # shift
-    'https://drive.google.com/uc?export=download&id=12yIITL_DjUmmYnU6sz8yJFg7bxMP3dIw' # ta
+    'https://github.com/SonicZedt/ERT/raw/alt/Data/data_Class.ZEDT', # class
+    'https://github.com/SonicZedt/ERT/raw/alt/Data/data_Lab.ZEDT', # lab
+    'https://github.com/SonicZedt/ERT/raw/alt/Data/data_Shift.ZEDT', # shift
+    'https://raw.githubusercontent.com/SonicZedt/ERT/alt/Data/data_TA.txt' # ta
     ]
 
 def ReadData(url, data, message, type = 'ZEDT'):
@@ -22,7 +22,6 @@ def ReadData(url, data, message, type = 'ZEDT'):
         file = requests.get(url, allow_redirects=True)
         fileName = "Data_{0}.{1}".format(data, type)
         open(dataLoc + fileName, 'wb').write(file.content)
-        print(fileName)
         return fileName
 
     if type == 'ZEDT':
@@ -42,8 +41,9 @@ days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]
 
 def GetUserInput():
     global lab, minggu, level, currentCond
-    License.Read("License.ZEDT")
-    lab = (input("Lab: "))
+
+    License.Check()
+    lab = License.Read()
     minggu = int(input("Minggu ke-: "))
     level = input("Jenjang: ")
     if level.islower():
@@ -69,7 +69,8 @@ def InputCheck(): # Redo input if incorrect value given
 if __name__ == "Source":
     print('\n')
     GetUserInput()
-    License.Validation(lab)
+    ERT.ClearData()
+    License.Validation(lab, minggu)
     print('\n')
 
 #region labGroup indexer, covid_conditional
@@ -90,7 +91,7 @@ else:
 #endregion
 
 def GetDataAssistant():
-    url = "https://drive.google.com/uc?export=download&id=1gdU4G8a81j-cX7zu9n180zZZFC2MwX3j"
+    url = "https://raw.githubusercontent.com/SonicZedt/ERT/alt/Data/data_Assistant.csv"
     if check.Url(url):
         return url
     else:
@@ -101,7 +102,7 @@ fileBAPLoc = "BAP/Minggu_{0}/".format(minggu)
 fileTargetLoc = "Recap/"
 fileTempLoc = "Recap/temp/"
 dataAssistant = pandas.read_csv(GetDataAssistant()).to_dict()
-fileTXTTarget = "{0}Rekap VLab {1} minggu {2}.txt".format(fileTargetLoc,labList[labGroup][0], minggu)
+fileTXTTarget = "{0}Rekap VLab {1} minggu {2}.txt".format(fileTargetLoc, labList[labGroup][0], minggu)
 fileDOCXTarget = "{0}BAP {1} {2} MINGGU {3}.docx".format(fileTargetLoc, labList[labGroup][1], level, minggu)
 
 #region Load all .docx files
