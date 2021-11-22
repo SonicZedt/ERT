@@ -1,5 +1,6 @@
 import requests
 import os
+import pickle
 
 class font_color:
     error = '\033[91m'
@@ -9,6 +10,8 @@ class font_color:
 class error_message:
     notFound = "{0}[Error] Data - 404{1}".format(font_color.error, font_color.normal)
     connectionFail = "{0}[Error] Tidak ada koneksi internet{1}".format(font_color.error, font_color.normal)
+    badLicense = "{0}[Error] Lisensi tidak valid!{1}".format(font_color.error, font_color.normal)
+    unlicensedLab = "{0}[Error] Lisensi tidak sesuai atau Lab ini belum terlisensi{1}".format(font_color.error, font_color.normal)
 
     def Generate(source, keyword, extra = ""):
         if extra:
@@ -42,3 +45,29 @@ class ERT:
     def Exit():
             input("Tekan Enter untuk keluar")
             exit()
+
+class License:
+    licensedLab = ""
+    def Read(license):
+        global licensedLab
+
+        labList = pickle.load(open("Data/Data_Lab.ZEDT", 'rb'))
+        with open(license, 'rb') as file:
+            licensedLab = pickle.load(file)
+        
+        for lab in labList:
+            if isinstance(labList[0], list):
+                for name in lab:
+                    if licensedLab == name:
+                        print("{0}ERT terlisensi untuk {1}{2}\n".format(font_color.success, lab[2], font_color.normal))
+                        return
+        else:
+            print(error_message.badLicense)
+            ERT.Exit()
+    
+    def Validation(lab):
+        if lab == licensedLab:
+            return
+        else:
+            print(error_message.unlicensedLab)
+            ERT.Exit()

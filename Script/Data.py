@@ -1,7 +1,7 @@
 import pickle
 import requests
 
-var = ''
+var = 'asdjhauisjh'
 url = ''
 
 def GetOnline():
@@ -15,3 +15,5 @@ def Create(fileName):
 def Read(fileName):
     with open(fileName, 'rb') as file:
         print(pickle.load(file))
+
+Create('License.ZEDT')

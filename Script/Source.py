@@ -3,28 +3,29 @@ import docx
 import pandas
 import requests
 import pickle
-from Handler import check, ERT
+from Handler import check, ERT, License
 
 dataLoc = "Data/"
 urlList = [
-    'https://github.com/SonicZedt/ERT/raw/alt/Data/Data_Class.ZEDT',
-    'https://github.com/SonicZedt/ERT/raw/alt/Data/Data_Lab.ZEDT',
-    'https://github.com/SonicZedt/ERT/raw/alt/Data/Data_Shift.ZEDT',
-    'https://raw.githubusercontent.com/SonicZedt/ERT/alt/Data/Data_TA.txt'
+    'https://drive.google.com/uc?export=download&id=1VaW-0_6JXbyf8ZreOkgc7t5dHAQZVavB', # class
+    'https://drive.google.com/uc?export=download&id=1T7MheGGLmsWOQc981uwfNU7nV_q3u1qv', # lab
+    'https://drive.google.com/uc?export=download&id=14rS4B7_UvZCFVnBvNK0dUNQL_EwkydSs', # shift
+    'https://drive.google.com/uc?export=download&id=12yIITL_DjUmmYnU6sz8yJFg7bxMP3dIw' # ta
     ]
 
-def ReadData(url, message, type = 'binary'):
+def ReadData(url, data, message, type = 'ZEDT'):
     if not check.Url(url):
         ERT.Exit()
 
     print("Membaca data", message)  
     def GetData(url):
         file = requests.get(url, allow_redirects=True)
-        fileName = url.rsplit('/', 1)[1]
+        fileName = "Data_{0}.{1}".format(data, type)
         open(dataLoc + fileName, 'wb').write(file.content)
+        print(fileName)
         return fileName
 
-    if type == 'binary':
+    if type == 'ZEDT':
         data = dataLoc + GetData(url)
         with open(data, 'rb') as dataFile:
             return pickle.load(dataFile)
@@ -33,14 +34,15 @@ def ReadData(url, message, type = 'binary'):
         with open(dataLoc + GetData(url), 'r') as dataFile:
             return dataFile.readline()
 
-classes = ReadData(urlList[0], "1/" + str(len(urlList)))
-labList = ReadData(urlList[1], "2/" + str(len(urlList)))
-shift = ReadData(urlList[2], "3/" + str(len(urlList)))
-year = ReadData(urlList[3], "4/" + str(len(urlList)), type='txt')
+classes = ReadData(urlList[0], "Class", "1/" + str(len(urlList)))
+labList = ReadData(urlList[1], "Lab", "2/" + str(len(urlList)))
+shift = ReadData(urlList[2], "Shift", "3/" + str(len(urlList)))
+year = ReadData(urlList[3], "TA", "4/" + str(len(urlList)), type='txt')
 days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]
 
 def GetUserInput():
     global lab, minggu, level, currentCond
+    License.Read("License.ZEDT")
     lab = (input("Lab: "))
     minggu = int(input("Minggu ke-: "))
     level = input("Jenjang: ")
@@ -67,7 +69,7 @@ def InputCheck(): # Redo input if incorrect value given
 if __name__ == "Source":
     print('\n')
     GetUserInput()
-    InputCheck()
+    License.Validation(lab)
     print('\n')
 
 #region labGroup indexer, covid_conditional
@@ -88,7 +90,7 @@ else:
 #endregion
 
 def GetDataAssistant():
-    url = "https://raw.githubusercontent.com/SonicZedt/ERT/alt/Data/Data_Assistant.csv"
+    url = "https://drive.google.com/uc?export=download&id=1gdU4G8a81j-cX7zu9n180zZZFC2MwX3j"
     if check.Url(url):
         return url
     else:
