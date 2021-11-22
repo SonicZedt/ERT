@@ -9,13 +9,6 @@ Elkom Recap Tool adalah sebuah tool yang dibuat untuk memudahkan Penanggung Jawa
 ![fileList_raw](https://user-images.githubusercontent.com/83224221/135095716-e921f523-3b4d-4e11-9a28-2d5e383d589a.jpg)
 3. Buka file `ERT.exe`
 4. Masukan input yang dibutuhkan:
-   - `Lab: str`. Berikut adalah list input yang dapat terbaca:
-      - `["eldas", "ELEKTRONIKA DASAR", "Elektronika Dasar"],`
-      - `["elan", "ELEKTRONIKA LANJUT", "Elektronika Lanjut"],`
-      - `["sisdig", "SISTEM DIGITAL", "Sistem Digital"],`
-      - `["mp", "MIRKOPROSESOR", "Mikroprosesor"],`
-      - `["sister", "SISTEM TERTANAM", "Sistem Tertanam"],`
-      - `["iface", "INTERFACE", "Interface"]`
    - `Minggu ke-: int`
    - `Jenjang: str`
    - `Daring (y/n): str` (y atau yang lainnya). Akan ditambahkan text ` SELAMA COVID-19` pada header dan ` secara virtual` pada subheader untuk rekapan (_.docx_) apabila diberikan input `y`  
@@ -25,10 +18,10 @@ Elkom Recap Tool adalah sebuah tool yang dibuat untuk memudahkan Penanggung Jawa
 <br/>
   
 ### Format Laporan PJ Shift
-Format laporan PJ Shift yang dapat dibaca adalah laporan yang berekstensi (_.docx_) dan didalamnya terdapat:
+Format laporan PJ Shift yang dapat dibaca adalah laporan yang berekstensi (_.docx_), nama file mengandung text `eldas, sisdig, mp, sister, atau iface` **(tidak case sensitive)**, serta didalamnya terdapat:
 - `Hari`. Nama hari yang dapat terbaca adalah `["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]`.
 - `Kelas/Shift`. Kelas yang dapat terbaca adalah yang 3 huruf pertamanya `["2KB", "3KB", "2DC", "3DC"]`. Shift yang dapat terbaca adalah `["Shift 1", "Shift 2", "Shift 3", "Shift 4", "Shift 5"]`
-- `(Nama Asisten/Coass)` yang dapat terbaca adalah nama-nama yang tertera di dalam *Data_Assistant.xlxs*
+- `(Nama Asisten/Coass)` yang dapat terbaca adalah nama-nama yang tertera di dalam *data_Assistant.xlxs*
 <br/>
 Tanggal dan Hari tidak akan terbaca apabila tulisan `Hari` tidak ada atau ditulis secara tidak benar di dalam laporan.
 <br/>
@@ -40,3 +33,6 @@ Untuk lebih jelasnya dapat lihat [contoh laporan PJ Shift](https://docs.google.c
   
 ### Koneksi
 ERT memerlukan koneksi internet untuk membaca data. Operasi tidak dapat dilakukan apabila .\Data kosong
+
+### Lisensi
+File `Lisence.ZEDT` harus sesuai dan diletakan di dalam direktori instalasi agar proses perekapan otomatis dapat dilakukan
