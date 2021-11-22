@@ -135,3 +135,6 @@ dmypy.json
 
 # ignore raw data
 Data/
+
+# ignore Licenses
+Licenses/
