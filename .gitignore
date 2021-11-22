@@ -133,8 +133,5 @@ dmypy.json
 **/*.txt
 **/testfile.py
 
-# ignore raw data
-Data/
-
 # ignore Licenses
 Licenses/
