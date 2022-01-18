@@ -21,3 +21,6 @@ def Header():
 
 def SetTextColor():
     os.system('color 0E') #Light yellow
+
+def Footer():
+    print("======[ZEDT]======\n\n")
